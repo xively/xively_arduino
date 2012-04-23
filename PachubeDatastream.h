@@ -1,47 +1,50 @@
 #ifndef PACHUBE_DATASTREAM_H
 #define PACHUBE_DATASTREAM_H
 
-#include <Print.h>
+#include <Stream.h>
 #include <Printable.h>
 
+#define DATASTREAM_STRING 0
+#define DATASTREAM_BUFFER 1
+#define DATASTREAM_INT 2
+#define DATASTREAM_FLOAT 3
+
 class Datastream : public Printable {
-public:
-  enum DataType { eString, eInt, eFloat };
-  virtual DataType getDataType() const =0;
-  virtual void value(int aValue) =0;
-  virtual void value(float aValue) =0;
-  virtual void value(String aValue) =0;
-};
+  friend class PachubeClient;
 
-class DatastreamBufferInt : public Datastream {
+  typedef struct {
+    char* _buffer;
+    int _bufferSize;
+  } tBuffer;
 public:
-  DatastreamBufferInt(char* aId, int aIdLength, int aValue);
-  DatastreamBufferInt(char* aId, int aIdLength);
-  virtual DataType getDataType() const { return eInt; };
+
+  Datastream(String& aId, int aType);
+  Datastream(char* aIdBuffer, int aIdBufferLength, int aType);
+  Datastream(char* aIdBuffer, int aIdBufferLength, int aType, char* aValueBuffer, int aValueBufferLength);
+  int updateValue(Stream& aStream);
+  void setInt(int aValue);
+  void setFloat(float aValue);
+  void setString(String& aValue);
+  void setBuffer(const char* aValue);
+  String& getString();
+  int getInt();
+  float getFloat();
+  char* getBuffer();
   virtual size_t printTo(Print&) const;
-  int value() const { return _value; };
-  virtual void value(int aValue) { _value = aValue; };
-  virtual void value(float aValue) { _value = aValue; };
-  virtual void value(String aValue) { /* Can't do anything with a string */ };
+protected:
+  int idLength() { return (_idType == DATASTREAM_STRING ? _idString.length() : strlen(_idBuffer._buffer)); };
+  char idChar(int idx) { return (_idType == DATASTREAM_STRING ? _idString[idx] : (idx > strlen(_idBuffer._buffer) ? '\0' : _idBuffer._buffer[idx])); };
 
-  char* _id;
-  int _idLength;
-  int _value;
-};
-
-class DatastreamStringString : public Datastream {
-public:
-  DatastreamStringString(String aId, String aValue);
-  DatastreamStringString();
-  virtual DataType getDataType() const { return eString; };
-  virtual size_t printTo(Print&) const;
-  String value() const { return _value; };
-  virtual void value(int aValue) { _value = ""; _value += aValue; };
-  virtual void value(float aValue) { /* can't convert from a float */ };
-  virtual void value(String aValue) { _value = aValue; };
-  
-  String _id;
-  String _value;
+  int _idType;
+  String _idString;
+  tBuffer _idBuffer;
+  int _valueType;
+  String _valueString;
+  union {
+    tBuffer _valueBuffer;
+    int _valueInt;
+    float _valueFloat;
+  } _value;
 };
 
 #endif

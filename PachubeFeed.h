@@ -4,21 +4,21 @@
 
 #include <Client.h>
 #include <PachubeDatastream.h>
+#include <Printable.h>
 
-class PachubeFeed
+class PachubeFeed : public Printable
 {
 public:
-  PachubeFeed(char* aID, Client& aClient, Datastream* aDatastreams, int aDatastreamsCount);
+  PachubeFeed(unsigned long aID, Datastream* aDatastreams, int aDatastreamsCount);
 
-  int put(const char* aApiKey);
+  virtual size_t printTo(Print&) const;
+  unsigned long id() { return _id; };
+  int size() { return _datastreamsCount; };
+  Datastream& operator[] (unsigned i) { return _datastreams[i]; };
 protected:
-  static const int kCalculateDataLength =0;
-  static const int kSendData =1;
-
-  //unsigned long _id;
+  unsigned long _id;
   // FIXME Need to pick right sizes, not have magic numbers here
-  char _id[15];
-  Client& _client;
+  //char _id[15];
   Datastream* _datastreams;
   int _datastreamsCount;
 };
