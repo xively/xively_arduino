@@ -1,0 +1,35 @@
+#######################################
+# Syntax Coloring Map For Pachube
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PachubeClient	KEYWORD1
+Datastream	KEYWORD1
+PachubeFeed	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+get	KEYWORD2
+put	KEYWORD2
+updateValue	KEYWORD2
+setFloat	KEYWORD2
+setString	KEYWORD2
+setBuffer	KEYWORD2
+getFloat	KEYWORD2
+getBuffer	KEYWORD2
+getString	KEYWORD2
+id	KEYWORD2
+size	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+DATASTREAM_STRING 0 LITERAL1
+DATASTREAM_BUFFER 1 LITERAL1
+DATASTREAM_FLOAT 2 LITERAL1
+
