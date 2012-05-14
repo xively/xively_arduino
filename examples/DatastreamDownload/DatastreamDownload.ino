@@ -16,7 +16,7 @@ CosmDatastream datastreams[] = {
   CosmDatastream(temperatureId, strlen(temperatureId), DATASTREAM_FLOAT),
 };
 // Finally, wrap the datastreams into a feed
-CosmFeed feed(15552, datastreams, 2 /* number of datastreams */);
+CosmFeed feed(15552, datastreams, 1 /* number of datastreams */);
 
 EthernetClient client;
 CosmClient cosmclient(client);
