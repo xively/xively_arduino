@@ -1,22 +1,22 @@
-#include <Pachube.h>
+#include <Cosm.h>
 #include <HttpClient.h>
 #include <CountingStream.h>
 
-PachubeClient::PachubeClient(Client& aClient)
+CosmClient::CosmClient(Client& aClient)
   : _client(aClient)
 {
 }
 
-int PachubeClient::put(PachubeFeed& aFeed, const char* aApiKey)
+int CosmClient::put(CosmFeed& aFeed, const char* aApiKey)
 {
   HttpClient http(_client);
   char path[30];
   buildPath(path, aFeed.id(), "json");
   http.beginRequest();
-  int ret = http.put("api.pachube.com", path);
+  int ret = http.put("api.cosm.com", path);
   if (ret == 0)
   {
-    http.sendHeader("X-PachubeApiKey", aApiKey);
+    http.sendHeader("X-CosmApiKey", aApiKey);
 
     CountingStream countingStream; // Used to work out how long that data will be
     for (int i =kCalculateDataLength; i <= kSendData; i++)
@@ -55,7 +55,7 @@ int PachubeClient::put(PachubeFeed& aFeed, const char* aApiKey)
   return ret;
 }
 
-void PachubeClient::buildPath(char* aDest, unsigned long aFeedId, const char* aFormat)
+void CosmClient::buildPath(char* aDest, unsigned long aFeedId, const char* aFormat)
 {
   char idstr[12]; 
   strcpy(aDest, "/v2/feeds/");
@@ -67,16 +67,16 @@ void PachubeClient::buildPath(char* aDest, unsigned long aFeedId, const char* aF
   strcat(aDest, aFormat);
 }
 
-int PachubeClient::get(PachubeFeed& aFeed, const char* aApiKey)
+int CosmClient::get(CosmFeed& aFeed, const char* aApiKey)
 {
   HttpClient http(_client);
   char path[30];
   buildPath(path, aFeed.id(), "csv");
   http.beginRequest();
-  int ret = http.get("api.pachube.com", path);
+  int ret = http.get("api.cosm.com", path);
   if (ret == 0)
   {
-    http.sendHeader("X-PachubeApiKey", aApiKey);
+    http.sendHeader("X-CosmApiKey", aApiKey);
     http.endRequest();
 
     ret = http.responseStatusCode();

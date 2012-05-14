@@ -1,13 +1,13 @@
 #include <SPI.h>
 #include <Ethernet.h>
 #include <HttpClient.h>
-#include <Pachube.h>
+#include <Cosm.h>
 
 // MAC address for your Ethernet shield
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
-// Your Pachube key to let you upload data
-char pachubeKey[] = "xW0uK8RZ-SrBgxH0-wO2MguKXdGDwMFjXGiOA6EB9KQ";
+// Your Cosm key to let you upload data
+char cosmKey[] = "xW0uK8RZ-SrBgxH0-wO2MguKXdGDwMFjXGiOA6EB9KQ";
 
 // Analog pin which we're monitoring (0 and 1 are used by the Ethernet shield)
 int sensorPin = 2;
@@ -18,22 +18,22 @@ char bufferId[] = "info_message";
 String stringId("random_string");
 const int bufferSize = 140;
 char bufferValue[bufferSize]; // enough space to store the string we're going to send
-Datastream datastreams[] = {
-  Datastream(sensorId, strlen(sensorId), DATASTREAM_FLOAT),
-  Datastream(bufferId, strlen(bufferId), DATASTREAM_BUFFER, bufferValue, bufferSize),
-  Datastream(stringId, DATASTREAM_STRING)
+CosmDatastream datastreams[] = {
+  CosmDatastream(sensorId, strlen(sensorId), DATASTREAM_FLOAT),
+  CosmDatastream(bufferId, strlen(bufferId), DATASTREAM_BUFFER, bufferValue, bufferSize),
+  CosmDatastream(stringId, DATASTREAM_STRING)
 };
 // Finally, wrap the datastreams into a feed
-PachubeFeed feed(15552, datastreams, 3 /* number of datastreams */);
+CosmFeed feed(15552, datastreams, 3 /* number of datastreams */);
 
 EthernetClient client;
-PachubeClient pachubeclient(client);
+CosmClient cosmclient(client);
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   
-  Serial.println("Starting multiple datastream upload to Pachube...");
+  Serial.println("Starting multiple datastream upload to Cosm...");
   Serial.println();
 
   while (Ethernet.begin(mac) != 1)
@@ -61,9 +61,9 @@ void loop() {
   Serial.print("Setting string value to:\n    ");
   Serial.println(datastreams[2].getString());
 
-  Serial.println("Uploading it to Pachube");
-  int ret = pachubeclient.put(feed, pachubeKey);
-  Serial.print("pachubeclient.put returned ");
+  Serial.println("Uploading it to Cosm");
+  int ret = cosmclient.put(feed, cosmKey);
+  Serial.print("cosmclient.put returned ");
   Serial.println(ret);
 
   Serial.println();

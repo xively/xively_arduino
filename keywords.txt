@@ -1,14 +1,14 @@
 #######################################
-# Syntax Coloring Map For Pachube
+# Syntax Coloring Map For Cosm
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-PachubeClient	KEYWORD1
-Datastream	KEYWORD1
-PachubeFeed	KEYWORD1
+CosmClient	KEYWORD1
+CosmDatastream	KEYWORD1
+CosmFeed	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

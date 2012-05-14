@@ -1,12 +1,12 @@
-#include <Pachube.h>
+#include <Cosm.h>
 
-PachubeFeed::PachubeFeed(unsigned long aID, Datastream* aDatastreams, int aDatastreamsCount)
+CosmFeed::CosmFeed(unsigned long aID, CosmDatastream* aDatastreams, int aDatastreamsCount)
   : _id(aID), _datastreams(aDatastreams), _datastreamsCount(aDatastreamsCount)
 {
   //strcpy(_id, aID);
 }
 
-size_t PachubeFeed::printTo(Print& aPrint) const
+size_t CosmFeed::printTo(Print& aPrint) const
 {
   int len = 0;
   len += aPrint.println("{");

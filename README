@@ -1,3 +1,3 @@
-A library for Arduino to make it easier to talk to Pachube.
+A library for Arduino to make it easier to talk to Cosm (the service formerly known as Pachube).
 
 Requires the HTTP Client library in https://github.com/arduino/Arduino/pull/69 - which should be included in Arduino 1.0.1.

@@ -1,18 +1,18 @@
-#include <PachubeDatastream.h>
+#include <CosmDatastream.h>
 
-Datastream::Datastream(String& aId, int aType)
+CosmDatastream::CosmDatastream(String& aId, int aType)
   : _idType(DATASTREAM_STRING), _valueType(aType), _idString(aId)
 {
 }
 
-Datastream::Datastream(char* aIdBuffer, int aIdBufferSize, int aType)
+CosmDatastream::CosmDatastream(char* aIdBuffer, int aIdBufferSize, int aType)
   : _idType(DATASTREAM_BUFFER), _valueType(aType), _idString(), _valueString()
 {
   _idBuffer._buffer = aIdBuffer;
   _idBuffer._bufferSize = aIdBufferSize;
 }
 
-Datastream::Datastream(char* aIdBuffer, int aIdBufferSize, int aType, char* aValueBuffer, int aValueBufferSize)
+CosmDatastream::CosmDatastream(char* aIdBuffer, int aIdBufferSize, int aType, char* aValueBuffer, int aValueBufferSize)
   : _idType(DATASTREAM_BUFFER), _valueType(aType)
 {
   _idBuffer._buffer = aIdBuffer;
@@ -21,7 +21,7 @@ Datastream::Datastream(char* aIdBuffer, int aIdBufferSize, int aType, char* aVal
   _value._valueBuffer._bufferSize = aValueBufferSize;
 }
 
-int Datastream::updateValue(Stream& aStream)
+int CosmDatastream::updateValue(Stream& aStream)
 {
   switch (_valueType)
   {
@@ -43,7 +43,7 @@ int Datastream::updateValue(Stream& aStream)
   };
 }
 
-void Datastream::setInt(int aValue)
+void CosmDatastream::setInt(int aValue)
 {
   if (_valueType == DATASTREAM_INT)
   {
@@ -51,7 +51,7 @@ void Datastream::setInt(int aValue)
   }
 }
 
-void Datastream::setFloat(float aValue)
+void CosmDatastream::setFloat(float aValue)
 {
   if (_valueType == DATASTREAM_FLOAT)
   {
@@ -59,7 +59,7 @@ void Datastream::setFloat(float aValue)
   }
 }
 
-void Datastream::setString(String& aValue)
+void CosmDatastream::setString(String& aValue)
 {
   if (_valueType == DATASTREAM_STRING)
   {
@@ -67,7 +67,7 @@ void Datastream::setString(String& aValue)
   }
 }
 
-void Datastream::setBuffer(const char* aBuffer)
+void CosmDatastream::setBuffer(const char* aBuffer)
 {
   if (_valueType == DATASTREAM_BUFFER)
   {
@@ -75,7 +75,7 @@ void Datastream::setBuffer(const char* aBuffer)
   }
 }
 
-int Datastream::getInt()
+int CosmDatastream::getInt()
 {
   if (_valueType == DATASTREAM_INT)
   {
@@ -87,7 +87,7 @@ int Datastream::getInt()
   }
 }
 
-float Datastream::getFloat()
+float CosmDatastream::getFloat()
 {
   if (_valueType == DATASTREAM_FLOAT)
   {
@@ -99,12 +99,12 @@ float Datastream::getFloat()
   }
 }
 
-String& Datastream::getString()
+String& CosmDatastream::getString()
 {
   return _valueString;
 }
 
-char* Datastream::getBuffer()
+char* CosmDatastream::getBuffer()
 {
   if (_valueType == DATASTREAM_BUFFER)
   {
@@ -116,7 +116,7 @@ char* Datastream::getBuffer()
   }
 }
 
-size_t Datastream::printTo(Print& aPrint) const
+size_t CosmDatastream::printTo(Print& aPrint) const
 {
   size_t count =0;
   count += aPrint.print("{ \"id\" : \"");

@@ -1,5 +1,5 @@
-#ifndef PACHUBE_DATASTREAM_H
-#define PACHUBE_DATASTREAM_H
+#ifndef COSM_DATASTREAM_H
+#define COSM_DATASTREAM_H
 
 #include <Stream.h>
 #include <Printable.h>
@@ -9,8 +9,8 @@
 #define DATASTREAM_INT 2
 #define DATASTREAM_FLOAT 3
 
-class Datastream : public Printable {
-  friend class PachubeClient;
+class CosmDatastream : public Printable {
+  friend class CosmClient;
 
   typedef struct {
     char* _buffer;
@@ -18,9 +18,9 @@ class Datastream : public Printable {
   } tBuffer;
 public:
 
-  Datastream(String& aId, int aType);
-  Datastream(char* aIdBuffer, int aIdBufferLength, int aType);
-  Datastream(char* aIdBuffer, int aIdBufferLength, int aType, char* aValueBuffer, int aValueBufferLength);
+  CosmDatastream(String& aId, int aType);
+  CosmDatastream(char* aIdBuffer, int aIdBufferLength, int aType);
+  CosmDatastream(char* aIdBuffer, int aIdBufferLength, int aType, char* aValueBuffer, int aValueBufferLength);
   int updateValue(Stream& aStream);
   void setInt(int aValue);
   void setFloat(float aValue);
