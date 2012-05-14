@@ -1,4 +1,6 @@
 #include <CosmDatastream.h>
+// FIXME Only needed until readStringUntil is available in Stream
+#include <Arduino.h>
 
 CosmDatastream::CosmDatastream(String& aId, int aType)
   : _idType(DATASTREAM_STRING), _valueType(aType), _idString(aId)
@@ -38,10 +40,30 @@ int CosmDatastream::updateValue(Stream& aStream)
     }
     break;
   case DATASTREAM_STRING:
-    // FIXME Implement String methods for Stream?
+    // FIXME Change this to use readStringUntil once that's in the core
+    // FIMXE and remove the timedRead method in here then too
+    _valueString = "";
+    int c = timedRead(aStream);
+    while (c >= 0 && c != '\n')
+    {
+      _valueString += (char)c;
+      c = timedRead(aStream);
+    }
     break;
   };
 }
+
+int CosmDatastream::timedRead(Stream& aStream)
+{
+  int c;
+  long _startMillis = millis();
+  do {
+    c = aStream.read();
+    if (c >= 0) return c;
+  } while(millis() - _startMillis < 10000UL);
+  return -1;     // -1 indicates timeout
+}
+
 
 void CosmDatastream::setInt(int aValue)
 {
