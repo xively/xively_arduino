@@ -16,7 +16,7 @@ int CosmClient::put(CosmFeed& aFeed, const char* aApiKey)
   int ret = http.put("api.cosm.com", path);
   if (ret == 0)
   {
-    http.sendHeader("X-PachubeApiKey", aApiKey);
+    http.sendHeader("X-ApiKey", aApiKey);
 
     CountingStream countingStream; // Used to work out how long that data will be
     for (int i =kCalculateDataLength; i <= kSendData; i++)
@@ -76,7 +76,7 @@ int CosmClient::get(CosmFeed& aFeed, const char* aApiKey)
   int ret = http.get("api.cosm.com", path);
   if (ret == 0)
   {
-    http.sendHeader("X-PachubeApiKey", aApiKey);
+    http.sendHeader("X-ApiKey", aApiKey);
     http.endRequest();
 
     ret = http.responseStatusCode();
