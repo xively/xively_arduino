@@ -7,7 +7,7 @@
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
 // Your Cosm key to let you upload data
-char cosmKey[] = "AYC0gGBGd5sFG5ae9gushjbRM_QzywpfMkzwUlAH6V8";
+char cosmKey[] = "YOUR_COSM_API_KEY";
 
 // Define the string for our datastream ID
 char temperatureId[] = "temperature";

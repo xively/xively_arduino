@@ -7,7 +7,7 @@
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
 // Your Cosm key to let you upload data
-char cosmKey[] = "xW0uK8RZ-SrBgxH0-wO2MguKXdGDwMFjXGiOA6EB9KQ";
+char cosmKey[] = "YOUR_API_KEY";
 
 // Analog pin which we're monitoring (0 and 1 are used by the Ethernet shield)
 int sensorPin = 2;
