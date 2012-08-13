@@ -6,6 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+Cosm            KEYWORD1
 CosmClient	KEYWORD1
 CosmDatastream	KEYWORD1
 CosmFeed	KEYWORD1
