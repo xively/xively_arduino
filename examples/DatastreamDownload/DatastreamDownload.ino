@@ -40,11 +40,14 @@ void loop() {
   Serial.print("cosmclient.get returned ");
   Serial.println(ret);
 
-  Serial.println("Datastream is...");
-  Serial.println(feed[0]);
+  if (ret > 0)
+  {
+    Serial.println("Datastream is...");
+    Serial.println(feed[0]);
 
-  Serial.print("Temperature is: ");
-  Serial.println(feed[0].getFloat());
+    Serial.print("Temperature is: ");
+    Serial.println(feed[0].getFloat());
+  }
 
   Serial.println();
   delay(15000UL);
