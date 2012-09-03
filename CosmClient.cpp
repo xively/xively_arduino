@@ -50,6 +50,7 @@ int CosmClient::put(CosmFeed& aFeed, const char* aApiKey)
         ret = ret * -1;
       }
     }
+    http.flush();
     http.stop();
   }
   return ret;
