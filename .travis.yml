@@ -8,7 +8,7 @@ script:
     ;do env \
         USER_LIB_PATH=$PWD/../ \
         ARDUINO_DIR=/opt/arduino-${ARDUINO_IDE_VERSION} \
-        ../hwci-scripts/bin/arduino_make.sh -C $e -f $PWD/examples/include.mk \
+        ../hwci-scripts/bin/arduino_make.sh -C $e \
       && echo pass:$e >> results \
       || echo fail:$e >> results \
     ;done"
