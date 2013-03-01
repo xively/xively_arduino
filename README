@@ -1,5 +1,0 @@
-A library for Arduino to make it easier to talk to Cosm (the service formerly known as Pachube).
-
-The master copy of this code lives at http://github.com/cosm/cosm-arduino so make sure you're not looking at a branched copy elsewhere.
-
-Requires the HTTP Client library from https://github.com/amcewen/HttpClient
