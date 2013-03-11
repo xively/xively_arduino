@@ -17,6 +17,7 @@ int CosmClient::put(CosmFeed& aFeed, const char* aApiKey)
   if (ret == 0)
   {
     http.sendHeader("X-ApiKey", aApiKey);
+    http.sendHeader("User-Agent", "Cosm-Arduino-Lib/1.0");    
 
     CountingStream countingStream; // Used to work out how long that data will be
     for (int i =kCalculateDataLength; i <= kSendData; i++)
@@ -78,6 +79,7 @@ int CosmClient::get(CosmFeed& aFeed, const char* aApiKey)
   if (ret == 0)
   {
     http.sendHeader("X-ApiKey", aApiKey);
+    http.sendHeader("User-Agent", "Cosm-Arduino-Lib/1.0");    
     http.endRequest();
 
     ret = http.responseStatusCode();
