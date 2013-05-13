@@ -1,7 +1,7 @@
 Xively Arduino library
 ================
 
-A library for Arduino to make it easier to talk to Xively (the service formerly known as Pachube).
+A library for Arduino to make it easier to talk to Xively.
 
 This library **requires** the HTTP Client library at https://github.com/amcewen/HttpClient
 
