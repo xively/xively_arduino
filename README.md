@@ -3,7 +3,7 @@ Xively Arduino library
 
 A library for Arduino to make it easier to talk to Xively.
 
-This library **requires** the HTTP Client library at https://github.com/amcewen/HttpClient
+_This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 
 ##Features
 
@@ -11,10 +11,11 @@ This library **requires** the HTTP Client library at https://github.com/amcewen/
    	- Uploading datapoints
    	- Downloading datapoints
    2. Compatible with
-   	- Ethernet connections
+   	- Arduino Ethernet shieled
+      - Arduino Ethernet board
    	- Arduino Wifi shield
    	- WiFly shield
-   	
+
 ##For a Quickstart Example  
 Look no further!  If you want a quick example, connect your Arduino board to your computer and an ethernet cable and try out one of the examples included with this library.
 
