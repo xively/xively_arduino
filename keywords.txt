@@ -1,15 +1,15 @@
 #######################################
-# Syntax Coloring Map For Cosm
+# Syntax Coloring Map For Xively
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-Cosm            KEYWORD1
-CosmClient	KEYWORD1
-CosmDatastream	KEYWORD1
-CosmFeed	KEYWORD1
+Xively            KEYWORD1
+XivelyClient	KEYWORD1
+XivelyDatastream	KEYWORD1
+XivelyFeed	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

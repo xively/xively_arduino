@@ -1,23 +1,23 @@
-#include <Cosm.h>
+#include <Xively.h>
 #include <HttpClient.h>
 #include <CountingStream.h>
 
-CosmClient::CosmClient(Client& aClient)
+XivelyClient::XivelyClient(Client& aClient)
   : _client(aClient)
 {
 }
 
-int CosmClient::put(CosmFeed& aFeed, const char* aApiKey)
+int XivelyClient::put(XivelyFeed& aFeed, const char* aApiKey)
 {
   HttpClient http(_client);
   char path[30];
   buildPath(path, aFeed.id(), "json");
   http.beginRequest();
-  int ret = http.put("api.cosm.com", path);
+  int ret = http.put("api.xively.com", path);
   if (ret == 0)
   {
     http.sendHeader("X-ApiKey", aApiKey);
-    http.sendHeader("User-Agent", "Cosm-Arduino-Lib/1.0");    
+    http.sendHeader("User-Agent", "Xively-Arduino-Lib/1.0");    
 
     CountingStream countingStream; // Used to work out how long that data will be
     for (int i =kCalculateDataLength; i <= kSendData; i++)
@@ -57,7 +57,7 @@ int CosmClient::put(CosmFeed& aFeed, const char* aApiKey)
   return ret;
 }
 
-void CosmClient::buildPath(char* aDest, unsigned long aFeedId, const char* aFormat)
+void XivelyClient::buildPath(char* aDest, unsigned long aFeedId, const char* aFormat)
 {
   char idstr[12]; 
   strcpy(aDest, "/v2/feeds/");
@@ -69,17 +69,17 @@ void CosmClient::buildPath(char* aDest, unsigned long aFeedId, const char* aForm
   strcat(aDest, aFormat);
 }
 
-int CosmClient::get(CosmFeed& aFeed, const char* aApiKey)
+int XivelyClient::get(XivelyFeed& aFeed, const char* aApiKey)
 {
   HttpClient http(_client);
   char path[30];
   buildPath(path, aFeed.id(), "csv");
   http.beginRequest();
-  int ret = http.get("api.cosm.com", path);
+  int ret = http.get("api.xively.com", path);
   if (ret == 0)
   {
     http.sendHeader("X-ApiKey", aApiKey);
-    http.sendHeader("User-Agent", "Cosm-Arduino-Lib/1.0");    
+    http.sendHeader("User-Agent", "Xively-Arduino-Lib/1.0");    
     http.endRequest();
 
     ret = http.responseStatusCode();

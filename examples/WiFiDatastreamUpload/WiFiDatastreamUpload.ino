@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <WiFi.h>
 #include <HttpClient.h>
-#include <Cosm.h>
+#include <Xively.h>
 
 char ssid[] = "YourNetwork"; //  your network SSID (name) 
 char pass[] = "password";    // your network password (use for WPA, or use as key for WEP)
@@ -9,22 +9,22 @@ int keyIndex = 0;            // your network key Index number (needed only for W
 
 int status = WL_IDLE_STATUS;
 
-// Your Cosm key to let you upload data
-char cosmKey[] = "YOUR_API_KEY";
+// Your Xively key to let you upload data
+char xivelyKey[] = "YOUR_API_KEY";
 
 // Analog pin which we're monitoring (0 and 1 are used by the Ethernet shield)
 int sensorPin = 2;
 
 // Define the strings for our datastream IDs
 char sensorId[] = "sensor_reading";
-CosmDatastream datastreams[] = {
-  CosmDatastream(sensorId, strlen(sensorId), DATASTREAM_FLOAT),
+XivelyDatastream datastreams[] = {
+  XivelyDatastream(sensorId, strlen(sensorId), DATASTREAM_FLOAT),
 };
 // Finally, wrap the datastreams into a feed
-CosmFeed feed(15552, datastreams, 1 /* number of datastreams */);
+XivelyFeed feed(15552, datastreams, 1 /* number of datastreams */);
 
 WiFiClient client;
-CosmClient cosmclient(client);
+XivelyClient xivelyclient(client);
 
 void printWifiStatus() {
   // print the SSID of the network you're attached to:
@@ -46,7 +46,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   
-  Serial.println("Starting single datastream upload to Cosm...");
+  Serial.println("Starting single datastream upload to Xively...");
   Serial.println();
 
   // attempt to connect to Wifi network:
@@ -68,9 +68,9 @@ void loop() {
   Serial.print("Read sensor value ");
   Serial.println(datastreams[0].getFloat());
 
-  Serial.println("Uploading it to Cosm");
-  int ret = cosmclient.put(feed, cosmKey);
-  Serial.print("cosmclient.put returned ");
+  Serial.println("Uploading it to Xively");
+  int ret = xivelyclient.put(feed, xivelyKey);
+  Serial.print("xivelyclient.put returned ");
   Serial.println(ret);
 
   Serial.println();

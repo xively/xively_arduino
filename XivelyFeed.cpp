@@ -1,12 +1,12 @@
-#include <Cosm.h>
+#include <Xively.h>
 
-CosmFeed::CosmFeed(unsigned long aID, CosmDatastream* aDatastreams, int aDatastreamsCount)
+XivelyFeed::XivelyFeed(unsigned long aID, XivelyDatastream* aDatastreams, int aDatastreamsCount)
   : _id(aID), _datastreams(aDatastreams), _datastreamsCount(aDatastreamsCount)
 {
   //strcpy(_id, aID);
 }
 
-size_t CosmFeed::printTo(Print& aPrint) const
+size_t XivelyFeed::printTo(Print& aPrint) const
 {
   int len = 0;
   len += aPrint.println("{");

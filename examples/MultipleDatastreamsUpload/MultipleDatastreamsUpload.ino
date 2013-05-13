@@ -1,13 +1,13 @@
 #include <SPI.h>
 #include <Ethernet.h>
 #include <HttpClient.h>
-#include <Cosm.h>
+#include <Xively.h>
 
 // MAC address for your Ethernet shield
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
-// Your Cosm key to let you upload data
-char cosmKey[] = "YOUR_API_KEY";
+// Your Xively key to let you upload data
+char xivelyKey[] = "YOUR_API_KEY";
 
 // Analog pin which we're monitoring (0 and 1 are used by the Ethernet shield)
 int sensorPin = 2;
@@ -18,22 +18,22 @@ char bufferId[] = "info_message";
 String stringId("random_string");
 const int bufferSize = 140;
 char bufferValue[bufferSize]; // enough space to store the string we're going to send
-CosmDatastream datastreams[] = {
-  CosmDatastream(sensorId, strlen(sensorId), DATASTREAM_FLOAT),
-  CosmDatastream(bufferId, strlen(bufferId), DATASTREAM_BUFFER, bufferValue, bufferSize),
-  CosmDatastream(stringId, DATASTREAM_STRING)
+XivelyDatastream datastreams[] = {
+  XivelyDatastream(sensorId, strlen(sensorId), DATASTREAM_FLOAT),
+  XivelyDatastream(bufferId, strlen(bufferId), DATASTREAM_BUFFER, bufferValue, bufferSize),
+  XivelyDatastream(stringId, DATASTREAM_STRING)
 };
 // Finally, wrap the datastreams into a feed
-CosmFeed feed(15552, datastreams, 3 /* number of datastreams */);
+XivelyFeed feed(15552, datastreams, 3 /* number of datastreams */);
 
 EthernetClient client;
-CosmClient cosmclient(client);
+XivelyClient xivelyclient(client);
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   
-  Serial.println("Starting multiple datastream upload to Cosm...");
+  Serial.println("Starting multiple datastream upload to Xively...");
   Serial.println();
 
   while (Ethernet.begin(mac) != 1)
@@ -61,9 +61,9 @@ void loop() {
   Serial.print("Setting string value to:\n    ");
   Serial.println(datastreams[2].getString());
 
-  Serial.println("Uploading it to Cosm");
-  int ret = cosmclient.put(feed, cosmKey);
-  Serial.print("cosmclient.put returned ");
+  Serial.println("Uploading it to Xively");
+  int ret = xivelyclient.put(feed, xivelyKey);
+  Serial.print("xivelyclient.put returned ");
   Serial.println(ret);
 
   Serial.println();

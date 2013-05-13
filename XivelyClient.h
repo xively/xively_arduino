@@ -1,17 +1,17 @@
 
-#ifndef COSMCLIENT_H
-#define COSMCLIENT_H
+#ifndef XIVELYCLIENT_H
+#define XIVELYCLIENT_H
 
 #include <Client.h>
-#include <CosmFeed.h>
+#include <XivelyFeed.h>
 
-class CosmClient
+class XivelyClient
 {
 public:
-  CosmClient(Client& aClient);
+  XivelyClient(Client& aClient);
 
-  int get(CosmFeed& aFeed, const char* aApiKey);
-  int put(CosmFeed& aFeed, const char* aApiKey);
+  int get(XivelyFeed& aFeed, const char* aApiKey);
+  int put(XivelyFeed& aFeed, const char* aApiKey);
 
 protected:
   static const int kCalculateDataLength =0;

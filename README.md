@@ -1,7 +1,7 @@
-Cosm Arduino library
+Xively Arduino library
 ================
 
-A library for Arduino to make it easier to talk to Cosm (the service formerly known as Pachube).
+A library for Arduino to make it easier to talk to Xively (the service formerly known as Pachube).
 
 This library **requires** the HTTP Client library at https://github.com/amcewen/HttpClient
 
@@ -18,21 +18,21 @@ This library **requires** the HTTP Client library at https://github.com/amcewen/
 ##For a Quickstart Example  
 Look no further!  If you want a quick example, connect your Arduino board to your computer and an ethernet cable and try out one of the examples included with this library.
 
->In Arduino, go to Files > Examples and choose DatastreamUpload or DatastreamDownload from the cosm-arduino library folder	
+>In Arduino, go to Files > Examples and choose DatastreamUpload or DatastreamDownload from the xively-arduino library folder	
 
 ##Setup Your Sketch
 
 **1. Specify your API key and Feed ID**
 ```c
-char cosmKey[] = "YOUR_COSM_API_KEY";
+char xivelyKey[] = "YOUR_XIVELY_API_KEY";
 // Should be something like "HsNiCoe_Es2YYWltKeRFPZL2xhqSAKxIV21aV3lTL2h5OD0g"
 #define FEED_ID XXXXXX 
-// The 3 to 6-digit number (like 504 or 104097), that identifies the Cosm Feed you're using
+// The 3 to 6-digit number (like 504 or 104097), that identifies the Xively Feed you're using
 ```
 
 **2. Create IDs for your datastreams as `char` arrays (or `String` objects for a `String` datastream)**
 
-In Cosm, the name of a datastream is known as the **Stream ID**.  In the example below, we'll give the datastreams names by setting their **Stream IDs** as "humidity", "temperature", "my_thoughts_on_the_temperature" and "more_thoughts".
+In Xively, the name of a datastream is known as the **Stream ID**.  In the example below, we'll give the datastreams names by setting their **Stream IDs** as "humidity", "temperature", "my_thoughts_on_the_temperature" and "more_thoughts".
 
 ```c
 // For datastreams of floats:
@@ -47,26 +47,26 @@ const int bufferSize = 140;                   // size of the array
 char bufferValue[bufferSize];                 // the array of chars itself
 ```
 
-`String` datastreams and `char` buffer datastreams are similar: both will be able to send strings to Cosm datastreams. For beginners, using `String` datastreams will be fine much of the time. 
+`String` datastreams and `char` buffer datastreams are similar: both will be able to send strings to Xively datastreams. For beginners, using `String` datastreams will be fine much of the time. 
 
-Using char buffers reduces the memory footprint of your sketch by not requiring the String library.  Also, using char buffers allows you to specify exactly how much memory is used for a datapoint, so you don't accidentally overflow the Arduino's mem capacity with a huge string datapoint.  It's a little bit harder to understand for beginners -- consult CosmDatastream.cpp for info.
+Using char buffers reduces the memory footprint of your sketch by not requiring the String library.  Also, using char buffers allows you to specify exactly how much memory is used for a datapoint, so you don't accidentally overflow the Arduino's mem capacity with a huge string datapoint.  It's a little bit harder to understand for beginners -- consult XivelyDatastream.cpp for info.
 
-**3. Create an array of `CosmDatastream` objects**
+**3. Create an array of `XivelyDatastream` objects**
 
 ```c
-CosmDatastream datastreams[] = {
+XivelyDatastream datastreams[] = {
   // Float datastreams are set up like this:
-  CosmDatastream(myFloatStream, strlen(myFloatStream), DATASTREAM_FLOAT),
+  XivelyDatastream(myFloatStream, strlen(myFloatStream), DATASTREAM_FLOAT),
   // Int datastreams are set up like this:
-  CosmDatastream(myIntStream, strlen(myIntStream), DATASTREAM_INT),
+  XivelyDatastream(myIntStream, strlen(myIntStream), DATASTREAM_INT),
   // String datastreams are set up like this:
-  CosmDatastream(myStringStream, DATASTREAM_STRING),
+  XivelyDatastream(myStringStream, DATASTREAM_STRING),
   // Char buffer datastreams are set up like this:
-  CosmDatastream(myCharBufferStream, strlen(myCharBufferStream), DATASTREAM_BUFFER, bufferValue, bufferSize),
+  XivelyDatastream(myCharBufferStream, strlen(myCharBufferStream), DATASTREAM_BUFFER, bufferValue, bufferSize),
 };
 ```
 
-`CosmDatastream` objects can contains some or all of the following variables, depending on what type of datapoints are in the datastream (see above example for which are required):
+`XivelyDatastream` objects can contains some or all of the following variables, depending on what type of datapoints are in the datastream (see above example for which are required):
 
 | | Variable | Type | Description |
 |---|---|:---:|---|
@@ -77,28 +77,28 @@ CosmDatastream datastreams[] = {
 | 5 | aValueBufferLength | int | The number of elements in the `char` array
 
     
-**4. Last, wrap this array of `CosmDatastream` objects into a `CosmFeed`**
+**4. Last, wrap this array of `XivelyDatastream` objects into a `XivelyFeed`**
 
-Unlike the **Stream ID**, which is what a _Datastream's_ name is stored as, the **ID** of a _Feed_ is a number which is used to uniquely identify which Cosm Feed you are addressing.  For  example, a Feed **ID** of 504 would mean that you were using the feed at cosm.com/feeds/504.
+Unlike the **Stream ID**, which is what a _Datastream's_ name is stored as, the **ID** of a _Feed_ is a number which is used to uniquely identify which Xively Feed you are addressing.  For  example, a Feed **ID** of 504 would mean that you were using the feed at xively.com/feeds/504.
 
 ```c	
-CosmFeed feed(FEED_ID, datastreams, 4);
+XivelyFeed feed(FEED_ID, datastreams, 4);
 ```
 
 | | Variable | Type | Description |
 |---|---|:---:|---|
 | 1     | aID | unsigned long | The Feed's **ID**, as defined at the top of your sketch
-| 2     | aDatastreams | CosmDatastream* |Your `CosmDatastream` array
+| 2     | aDatastreams | XivelyDatastream* |Your `XivelyDatastream` array
 | 3 | aDatastreamsCount | int | How many datastreams are in the array
 
-**5. Instantiate the library's Cosm client**
+**5. Instantiate the library's Xively client**
 
 Connecting by ethernet:
 
 >If you're using the Ethernet library:
 ```c
 EthernetClient client;
-CosmClient cosmclient(client);
+XivelyClient xivelyclient(client);
 ```
 
 
@@ -106,18 +106,18 @@ If you're on wireless, be sure to enter your SSID and password as the library re
 >If you're using the built-in WiFi library:
 ```c
 WiFiClient client;
-CosmClient cosmclient(client);
+XivelyClient xivelyclient(client);
 ```
 
 ---
 >If you're using the [Sparkfun WiFly] [1] library:
 ```c
 WiFlyClient client;
-CosmClient cosmclient(client);	
+XivelyClient xivelyclient(client);	
 ```
 [1]: https://github.com/jmr13031/WiFly-Shield
 
-##Sending and Retrieving Cosm Datapoints
+##Sending and Retrieving Xively Datapoints
 
 ###Read a Datapoint
 ```c

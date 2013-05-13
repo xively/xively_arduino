@@ -1,20 +1,20 @@
-#include <CosmDatastream.h>
+#include <XivelyDatastream.h>
 // FIXME Only needed until readStringUntil is available in Stream
 #include <Arduino.h>
 
-CosmDatastream::CosmDatastream(String& aId, int aType)
+XivelyDatastream::XivelyDatastream(String& aId, int aType)
   : _idType(DATASTREAM_STRING), _valueType(aType), _idString(aId)
 {
 }
 
-CosmDatastream::CosmDatastream(char* aIdBuffer, int aIdBufferSize, int aType)
+XivelyDatastream::XivelyDatastream(char* aIdBuffer, int aIdBufferSize, int aType)
   : _idType(DATASTREAM_BUFFER), _valueType(aType), _idString(), _valueString()
 {
   _idBuffer._buffer = aIdBuffer;
   _idBuffer._bufferSize = aIdBufferSize;
 }
 
-CosmDatastream::CosmDatastream(char* aIdBuffer, int aIdBufferSize, int aType, char* aValueBuffer, int aValueBufferSize)
+XivelyDatastream::XivelyDatastream(char* aIdBuffer, int aIdBufferSize, int aType, char* aValueBuffer, int aValueBufferSize)
   : _idType(DATASTREAM_BUFFER), _valueType(aType)
 {
   _idBuffer._buffer = aIdBuffer;
@@ -23,7 +23,7 @@ CosmDatastream::CosmDatastream(char* aIdBuffer, int aIdBufferSize, int aType, ch
   _value._valueBuffer._bufferSize = aValueBufferSize;
 }
 
-int CosmDatastream::updateValue(Stream& aStream)
+int XivelyDatastream::updateValue(Stream& aStream)
 {
   switch (_valueType)
   {
@@ -53,7 +53,7 @@ int CosmDatastream::updateValue(Stream& aStream)
   };
 }
 
-int CosmDatastream::timedRead(Stream& aStream)
+int XivelyDatastream::timedRead(Stream& aStream)
 {
   int c;
   long _startMillis = millis();
@@ -65,7 +65,7 @@ int CosmDatastream::timedRead(Stream& aStream)
 }
 
 
-void CosmDatastream::setInt(int aValue)
+void XivelyDatastream::setInt(int aValue)
 {
   if (_valueType == DATASTREAM_INT)
   {
@@ -73,7 +73,7 @@ void CosmDatastream::setInt(int aValue)
   }
 }
 
-void CosmDatastream::setFloat(float aValue)
+void XivelyDatastream::setFloat(float aValue)
 {
   if (_valueType == DATASTREAM_FLOAT)
   {
@@ -81,7 +81,7 @@ void CosmDatastream::setFloat(float aValue)
   }
 }
 
-void CosmDatastream::setString(String& aValue)
+void XivelyDatastream::setString(String& aValue)
 {
   if (_valueType == DATASTREAM_STRING)
   {
@@ -89,7 +89,7 @@ void CosmDatastream::setString(String& aValue)
   }
 }
 
-void CosmDatastream::setBuffer(const char* aBuffer)
+void XivelyDatastream::setBuffer(const char* aBuffer)
 {
   if (_valueType == DATASTREAM_BUFFER)
   {
@@ -97,7 +97,7 @@ void CosmDatastream::setBuffer(const char* aBuffer)
   }
 }
 
-int CosmDatastream::getInt()
+int XivelyDatastream::getInt()
 {
   if (_valueType == DATASTREAM_INT)
   {
@@ -109,7 +109,7 @@ int CosmDatastream::getInt()
   }
 }
 
-float CosmDatastream::getFloat()
+float XivelyDatastream::getFloat()
 {
   if (_valueType == DATASTREAM_FLOAT)
   {
@@ -121,12 +121,12 @@ float CosmDatastream::getFloat()
   }
 }
 
-String& CosmDatastream::getString()
+String& XivelyDatastream::getString()
 {
   return _valueString;
 }
 
-char* CosmDatastream::getBuffer()
+char* XivelyDatastream::getBuffer()
 {
   if (_valueType == DATASTREAM_BUFFER)
   {
@@ -138,7 +138,7 @@ char* CosmDatastream::getBuffer()
   }
 }
 
-size_t CosmDatastream::printTo(Print& aPrint) const
+size_t XivelyDatastream::printTo(Print& aPrint) const
 {
   size_t count =0;
   count += aPrint.print("{ \"id\" : \"");

@@ -1,5 +1,5 @@
-#ifndef COSM_DATASTREAM_H
-#define COSM_DATASTREAM_H
+#ifndef XIVELY_DATASTREAM_H
+#define XIVELY_DATASTREAM_H
 
 #include <Stream.h>
 #include <Printable.h>
@@ -9,8 +9,8 @@
 #define DATASTREAM_INT 2
 #define DATASTREAM_FLOAT 3
 
-class CosmDatastream : public Printable {
-  friend class CosmClient;
+class XivelyDatastream : public Printable {
+  friend class XivelyClient;
 
   typedef struct {
     char* _buffer;
@@ -18,9 +18,9 @@ class CosmDatastream : public Printable {
   } tBuffer;
 public:
 
-  CosmDatastream(String& aId, int aType);
-  CosmDatastream(char* aIdBuffer, int aIdBufferLength, int aType);
-  CosmDatastream(char* aIdBuffer, int aIdBufferLength, int aType, char* aValueBuffer, int aValueBufferLength);
+  XivelyDatastream(String& aId, int aType);
+  XivelyDatastream(char* aIdBuffer, int aIdBufferLength, int aType);
+  XivelyDatastream(char* aIdBuffer, int aIdBufferLength, int aType, char* aValueBuffer, int aValueBufferLength);
   int updateValue(Stream& aStream);
   void setInt(int aValue);
   void setFloat(float aValue);
