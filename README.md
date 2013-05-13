@@ -9,7 +9,7 @@ _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
    1. Generic functions for:
    	- Uploading datapoints
    	- Downloading datapoints
-   2. Compatible with
+   2. Compatible with:
       - Arduino Ethernet shield
       - Arduino Ethernet board
       - Arduino Wifi shield
