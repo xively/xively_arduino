@@ -4,6 +4,8 @@ A library for Arduino to make it easier to talk to Xively.
 
 _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 
+[![Build Status](https://travis-ci.org/xively/xively-arduino.png?branch=master)](https://travis-ci.org/xively/xively-arduino)
+
 ##Features
 
    1. Generic functions for:
