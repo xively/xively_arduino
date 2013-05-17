@@ -4,6 +4,8 @@ A library for Arduino to make it easier to talk to Xively.
 
 _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 
+[![Build Status](https://travis-ci.org/xively/xively-arduino.png?branch=master)](https://travis-ci.org/xively/xively-arduino)
+
 ##Features
 
    1. Generic functions for:
@@ -138,3 +140,5 @@ datastreams[1].setInt(23);                              // Push an int datapoint
 datastreams[2].setString("Pretty comfy temperature");   // Push a String datapoint
 datastreams[3].setBuffer("But quite dry");              // Push a char buffer datapoint
 ```
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fa828feced5044961a2e1b6481ed83a9 "githalytics.com")](http://githalytics.com/xively/xively-arduino)
