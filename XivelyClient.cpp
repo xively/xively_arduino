@@ -108,7 +108,7 @@ int XivelyClient::get(XivelyFeed& aFeed, const char* aApiKey)
       }
       // As long as we've got bitfields to read
 // FIXME Need to time out if this hangs for too long
-      while ((http.available() || http.connected()))
+      while ((http.available() && http.connected()))
       {
         if (http.available())
         {
@@ -134,7 +134,7 @@ int XivelyClient::get(XivelyFeed& aFeed, const char* aApiKey)
             }
             // Need to run to the end of the line regardless now
             // And deliberately drop through into the next case
-            while ((next != '\r')  && (next != '\n') && (http.available() || http.connected()))
+            while ((next != '\r')  && (next != '\n') && (http.available() && http.connected()))
             {
               next = http.read();
             }
