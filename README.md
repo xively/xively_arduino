@@ -4,7 +4,7 @@ A library for Arduino to make it easier to talk to Xively.
 
 _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 
-[![Build Status](https://travis-ci.org/xively/xively-arduino.png?branch=master)](https://travis-ci.org/xively/xively-arduino)
+[![Build Status](https://travis-ci.org/xively/xively_arduino.png?branch=master)](https://travis-ci.org/xively/xively_arduino)
 
 ##Features
 
@@ -20,7 +20,7 @@ _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 ##For a Quickstart Example  
 Look no further!  If you want a quick example, connect your Arduino board to your computer and an ethernet cable and try out one of the examples included with this library.
 
->In Arduino, go to Files > Examples and choose DatastreamUpload or DatastreamDownload from the xively-arduino library folder	
+>In Arduino, go to Files > Examples and choose DatastreamUpload or DatastreamDownload from the xively_arduino library folder
 
 ##Setup Your Sketch
 
@@ -169,4 +169,4 @@ Therefore:
 * if we got a negative value (e.g. `HTTP_ERROR_CONNECTION_FAILED`, `HTTP_ERROR_TIMED_OUT` or other), we will return that as is
 * any _non-2xx_ status code is returned multiplied by _-1_, i.e. a _403 (Authentication error)_ will be returned as _-403_
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fa828feced5044961a2e1b6481ed83a9 "githalytics.com")](http://githalytics.com/xively/xively-arduino)
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fa828feced5044961a2e1b6481ed83a9 "githalytics.com")](http://githalytics.com/xively/xively_arduino)
