@@ -4,7 +4,7 @@ A library for Arduino to make it easier to talk to Xively.
 
 _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 
-[![Build Status](https://travis-ci.org/xively/xively-arduino.png?branch=master)](https://travis-ci.org/xively/xively-arduino)
+[![Build Status](https://travis-ci.org/xively/xively_arduino.png?branch=master)](https://travis-ci.org/xively/xively_arduino)
 
 ##Features
 
@@ -20,7 +20,7 @@ _This library requires [_HTTP Client_](https://github.com/amcewen/HttpClient)._
 ##For a Quickstart Example  
 Look no further!  If you want a quick example, connect your Arduino board to your computer and an ethernet cable and try out one of the examples included with this library.
 
->In Arduino, go to Files > Examples and choose DatastreamUpload or DatastreamDownload from the xively-arduino library folder	
+>In Arduino, go to Files > Examples and choose DatastreamUpload or DatastreamDownload from the xively_arduino library folder
 
 ##Setup Your Sketch
 
@@ -141,4 +141,32 @@ datastreams[2].setString("Pretty comfy temperature");   // Push a String datapoi
 datastreams[3].setBuffer("But quite dry");              // Push a char buffer datapoint
 ```
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fa828feced5044961a2e1b6481ed83a9 "githalytics.com")](http://githalytics.com/xively/xively-arduino)
+##Error codes
+
+This library uses [_amcewen/HttpClient_](https://github.com/amcewen/HttpClient/blob/master/HttpClient.h) which has following error codes:
+
+* `HTTP_SUCCESS = 0` - no error
+* `HTTP_ERROR_CONNECTION_FAILED = -1` - connection to _api.xively.com_ has failed
+* `HTTP_ERROR_API = -2` - a method of _HttpClient_ class was called incorrectly
+* `HTTP_ERROR_TIMED_OUT = -3` - connection with _api.xively.com_ has timed-out
+* `HTTP_ERROR_INVALID_RESPONSE = -4` - invalid or unexpected response from the server
+
+Apart from the above, the library will convert any _non-2xx_ status code to a nagative value like so:
+```c
+ret = http.responseStatusCode();
+if ((ret < 200) || (ret > 299))
+{
+
+  if (ret > 0)
+  {
+    ret = ret * -1;
+  }
+}
+```
+
+Therefore:
+* if we got a _2xx_, we will return that as is
+* if we got a negative value (e.g. `HTTP_ERROR_CONNECTION_FAILED`, `HTTP_ERROR_TIMED_OUT` or other), we will return that as is
+* any _non-2xx_ status code is returned multiplied by _-1_, i.e. a _403 (Authentication error)_ will be returned as _-403_
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fa828feced5044961a2e1b6481ed83a9 "githalytics.com")](http://githalytics.com/xively/xively_arduino)
