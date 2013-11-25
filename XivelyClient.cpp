@@ -2,6 +2,11 @@
 #include <HttpClient.h>
 #include <CountingStream.h>
 
+// Initialize constants
+const char* XivelyClient::kUserAgent = "Xively-Arduino-Lib/1.0";
+const char* XivelyClient::kApiHost = "api.xively.com";
+const char* XivelyClient::kApiKeyHeader = "X-ApiKey";
+
 XivelyClient::XivelyClient(Client& aClient)
   : _client(aClient)
 {
@@ -13,11 +18,10 @@ int XivelyClient::put(XivelyFeed& aFeed, const char* aApiKey)
   char path[30];
   buildPath(path, aFeed.id(), "json");
   http.beginRequest();
-  int ret = http.put("api.xively.com", path);
+  int ret = http.put(kApiHost, path, kUserAgent);
   if (ret == 0)
   {
-    http.sendHeader("X-ApiKey", aApiKey);
-    http.sendHeader("User-Agent", "Xively-Arduino-Lib/1.0");    
+    http.sendHeader(kApiKeyHeader, aApiKey);
 
     CountingStream countingStream; // Used to work out how long that data will be
     for (int i =kCalculateDataLength; i <= kSendData; i++)
@@ -36,7 +40,7 @@ int XivelyClient::put(XivelyFeed& aFeed, const char* aApiKey)
       if (i == kCalculateDataLength)
       {
         // We now know how long the data will be...
-        http.sendHeader("Content-Length", len);
+        http.sendHeader(HTTP_HEADER_CONTENT_LENGTH, len);
       }
     }
     // Now we're done sending the request
@@ -75,11 +79,10 @@ int XivelyClient::get(XivelyFeed& aFeed, const char* aApiKey)
   char path[30];
   buildPath(path, aFeed.id(), "csv");
   http.beginRequest();
-  int ret = http.get("api.xively.com", path);
+  int ret = http.get(kApiHost, path, kUserAgent);
   if (ret == 0)
   {
-    http.sendHeader("X-ApiKey", aApiKey);
-    http.sendHeader("User-Agent", "Xively-Arduino-Lib/1.0");    
+    http.sendHeader(kApiKeyHeader, aApiKey);
     http.endRequest();
 
     ret = http.responseStatusCode();

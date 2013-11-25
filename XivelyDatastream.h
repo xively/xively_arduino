@@ -34,8 +34,6 @@ public:
 protected:
   int idLength() { return (_idType == DATASTREAM_STRING ? _idString.length() : strlen(_idBuffer._buffer)); };
   char idChar(int idx) { return (_idType == DATASTREAM_STRING ? _idString[idx] : (idx > strlen(_idBuffer._buffer) ? '\0' : _idBuffer._buffer[idx])); };
-  // FIXME Only needed until readStringUntil is available in core
-  int timedRead(Stream& aStream);
 
   int _idType;
   String _idString;
