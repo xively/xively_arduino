@@ -14,6 +14,9 @@ public:
   int put(XivelyFeed& aFeed, const char* aApiKey);
 
 protected:
+  static const char* kUserAgent;
+  static const char* kApiHost;
+  static const char* kApiKeyHeader;
   static const int kCalculateDataLength =0;
   static const int kSendData =1;
   void buildPath(char* aDest, unsigned long aFeedId, const char* aFormat);
