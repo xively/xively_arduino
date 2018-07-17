@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-Xively            KEYWORD1
+Xively	KEYWORD1
 XivelyClient	KEYWORD1
 XivelyDatastream	KEYWORD1
 XivelyFeed	KEYWORD1
@@ -30,7 +30,7 @@ size	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
-DATASTREAM_STRING 0 LITERAL1
-DATASTREAM_BUFFER 1 LITERAL1
-DATASTREAM_FLOAT 2 LITERAL1
+DATASTREAM_STRING	LITERAL1
+DATASTREAM_BUFFER	LITERAL1
+DATASTREAM_FLOAT	LITERAL1
 
